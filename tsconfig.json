@@ -30,9 +30,6 @@
     "noImplicitUseStrict": false,
     "removeComments": true,
     "resolveJsonModule": true,
-    "paths": {
-      "@system": ["../../system"]
-    },
     "plugins": [
       {
         "name": "typescript-styled-plugin"

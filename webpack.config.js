@@ -1,19 +1,6 @@
 const path = require("path");
-const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const convertPathsToAliases = require("convert-tsconfig-paths-to-webpack-aliases")
-  .default;
-const tsconfig = require("./tsconfig.json");
 
-function cachedLoader(use) {
-  if (!Array.isArray(use)) use = [use];
-  return [
-    {
-      loader: "cache-loader",
-      options: { cacheDirectory: ".cache" }
-    }
-  ].concat(use);
-}
 module.exports = {
   mode: "development",
   target: "web",
@@ -36,10 +23,12 @@ module.exports = {
       {
         test: /\.ts(x?)$/,
         exclude: [/__tests__/, /node_modules/, /\.styles\.ts$/],
-        use: cachedLoader({
-          loader: "ts-loader",
-          options: { transpileOnly: true, experimentalWatchApi: true }
-        })
+        use: [
+          {
+            loader: "ts-loader",
+            options: { transpileOnly: true, experimentalWatchApi: true }
+          }
+        ]
       },
       {
         test: /\.styles\.ts$/,
@@ -54,8 +43,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           { loader: "style-loader", options: { singleton: true } },
-          "css-loader",
-          "css-validator-loader"
+          "css-loader"
         ],
         exclude: /\.linaria.css$/
       },
@@ -63,16 +51,14 @@ module.exports = {
         test: /\.linaria.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          { loader: "css-loader", options: { sourceMap: true } },
-          { loader: "css-validator-loader" }
+          { loader: "css-loader", options: { sourceMap: true } }
         ]
       }
     ]
   },
   resolve: {
     modules: [path.resolve(__dirname, "./node_modules"), path.resolve("./src")],
-    extensions: [".ts", ".tsx", ".js", ".json"],
-    alias: convertPathsToAliases(tsconfig)
+    extensions: [".ts", ".tsx", ".js", ".json"]
   },
   plugins: [
     new MiniCssExtractPlugin({
