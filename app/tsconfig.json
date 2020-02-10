@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "isolatedModules": false,
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declaration": false,
+    "noLib": false,
+    "lib": [
+      "dom",
+      "es2015",
+      "es2016.array.include",
+      "es2017",
+      "dom.iterable",
+      "scripthost",
+      "esnext.asynciterable"
+    ],
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "outDir": "build",
+    "sourceMap": true,
+    "baseUrl": "src",
+    "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitUseStrict": false,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@system": ["../../system"]
+    },
+    "plugins": [
+      {
+        "name": "typescript-styled-plugin"
+      }
+    ]
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "exclude": ["node_modules", "build"],
+  "filesGlob": ["**/*.ts"]
+}
